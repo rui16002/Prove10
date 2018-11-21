@@ -10,21 +10,35 @@
 		<input type="text" placeholder="id" name="id" id ="id"></br>
 		<br><br>
 	</form>
-	<button onclick="getPerson()">Get Details</button>
-
+	<button onclick="getData(1)">Get Details</button>
+	<button onclick="getData(2)">Get Parents</button>
+	<button onclick="getData(3)">Get Children</button>
+	
 	<p id='personOutput'>
 	
 	</p>
 	<script>
-		function getPerson() {
+		function getData(reqtype) {
 		  var xhttp = new XMLHttpRequest();
 		  xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 			  document.getElementById("personOutput").innerHTML =
 			  this.responseText;
 			}
+			else if(this.status == 500)
+				document.getElementById("personOutput").innerHTML =
+			  "No People Found with that ID";
 		  };
-		  xhttp.open("GET", "/getPerson?id=" + document.getElementById('id').value, true);
+		  let action = "";
+		  if(reqtype === 1)
+			action = "/getPerson";
+		  else if (reqtype === 2)
+			action = "/getParents";
+		  else if (reqtype ===3)
+			action = "/getChildren";
+
+			
+		  xhttp.open("GET", action + "?id=" + document.getElementById('id').value, true);
 		  xhttp.send();
 		}
 </script>
