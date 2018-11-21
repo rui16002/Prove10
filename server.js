@@ -5,26 +5,24 @@ const { Pool } = require("pg");
 const connectionString = process.env.DATABASE_URL || "postgres://steven:password@localhost:5432/familyhistory";
 const pool = new Pool({connectionString: connectionString});
 
-
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
+
 app.get('/getPerson', getPerson);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-function getPerson(request, response) {
-	var id = request.query.id;
-	
-
+function getPerson(req, res) {
+	var id = req.query.id;
 
 	 getPersonFromDb(id, function(error, result) {
 		if (error || result == null || result.length != 1) {
-			 response.status(500).json({success: false, data: error});
+			 res.status(500).json({success: false, data: error});
 		 } else {
 			 var person = result[0];
-			 response.status(200).json(result[0]);
+			 res.status(200).json(result[0]);
 		}
 	 });
 }
