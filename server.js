@@ -62,7 +62,6 @@ function getMovement(req, res) {
     var enddate = '2018/'+ query.month +'/' + d.getDate();
 	var startdate = '2018/' + query.month + '/01';
 	var type = query.type;
-	var movements = [];
 	console.log("getting movements of " + type + " from " + d.getMonth());
 
 	var sql = "SELECT typeID, name, movementDate, amount FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
@@ -72,7 +71,7 @@ function getMovement(req, res) {
 		 if (error || result == null) {
 		 	 res.status(500).json({success: false, data: error});
 		  } else {
-			 res.status(200).json(result.rows);
+			 res.status(200).json(result);
 		 }
 	})
 }
@@ -91,7 +90,7 @@ function getAvg(req, res) {
 		 if (error || result == null) {
 		 	 res.status(500).json({success: false, data: error});
 		  } else {
-			 res.status(200).json(result.rows);
+			 res.status(200).json(result);
 		 }
 	})
 }
@@ -109,13 +108,13 @@ function getTotal(req, res) {
 	console.log("getting total from type: "+ type);
 
 	var sql = "SELECT SUM(amount) FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
-	var params = [type];
+	var params = [type, startdate, enddate];
 
 	dbTransaction(sql, params, function(error, result) {
 		 if (error || result == null) {
 		 	 res.status(500).json({success: false, data: error});
 		  } else {
-			 res.status(200).json(result.rows);
+			 res.status(200).json(result);
 		 }
 	})
 }
@@ -138,7 +137,7 @@ function modifyMovement(req, res) {
 		 if (error || result == null) {
 		 	 res.status(500).json({success: false, data: error});
 		  } else {
-			 res.status(200).json(result.rows);
+			 res.status(200).json(result);
 		 }
 	})
 	}
@@ -156,7 +155,7 @@ function deleteMovement(req, res) {
 		 if (error || result == null) {
 		 	 res.status(500).json({success: false, data: error});
 		  } else {
-			 res.status(200).json(result.rows);
+			 res.status(200).json(result);
 		 }
 	})
 	}

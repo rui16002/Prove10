@@ -11,10 +11,10 @@ CREATE TABLE movements
 );
 
 INSERT INTO movements(typeID, name, movementDate, amount) VALUES
-  (1, 'Salary', '1878-08-28',1850.0),
-  (2, 'Tithings', '1849-08-06',185.0),
-  (2, 'Offering', '1849-08-06',18.5),
-  (3, 'BYU', '1849-08-06',18.5);
+  (1, 'Salary', '2018-08-01',1850.0),
+  (2, 'Tithings', '2018-08-02',185.0),
+  (2, 'Offering', '2018-08-02',18.5),
+  (3, 'BYU', '2018-08-06',18.5);
   
  CREATE TABLE types
  (
