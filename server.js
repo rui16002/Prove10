@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 
 const { Pool } = require("pg");
-const connectionString = process.env.DATABASE_URL || "postgres://rui16002:rui16002@localhost:5432/expensetracker";
+//const connectionString = process.env.DATABASE_URL || "postgres://rui16002:rui16002@localhost:5432/expensetracker";
+const connectionString = process.env.DATABASE_URL || "postgres://efxluiqvrhrgzy:db9c539cdae3ed30fbadf4275becc73eb5fddaa2c182785ddaf9660403828ead@ec2-50-17-203-51.compute-1.amazonaws.com:5432/d514ujq56t7saq";
 const pool = new Pool({connectionString: connectionString});
 
 app.set('port', (process.env.PORT || 5000));
@@ -56,12 +57,13 @@ Data returned: List of Expenses for the given type
 -------------------------------------------------------*/
 function getMovement(req, res) {
 	var query = req.query;
+	console.log(query);
 	var d = new Date(2018, query.month, 0);
     var enddate = '2018/'+ query.month +'/' + d.getDate();
 	var startdate = '2018/' + query.month + '/01';
 	var type = query.type;
 	var movements = [];
-	console.log("getting movements of " + type + " from " + month);
+	console.log("getting movements of " + type + " from " + d.getMonth());
 
 	var sql = "SELECT typeID, name, movementDate, amount FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
 	var params = [type, startdate, enddate];
