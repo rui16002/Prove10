@@ -42,18 +42,11 @@ function isFloat(n){
 }
 
 function isValidDate(d){
-	console.log("d is: " + d);
 	var vd = new Date(d);
-	console.log("vd is: " + vd);
 	var year = vd.getFullYear();
-	console.log("year is: " + year);
 	var month = vd.getMonth();
-	console.log("month is: " + month);
 	var day = vd.getDate();
-	console.log("day is: " + day);
 	const date = new Date(`${year}-${month + 1}-${day}`);
-	console.log("date is: " + date);
-	console.log("validation is: " + (Boolean(+date) && date.getDate().toString() === day));
 	return (Boolean(+date) && date.getDate().toString() === day.toString());
 }
 
@@ -112,7 +105,7 @@ function getMovement(req, res) {
 	var startdate = new Date(new Date(Date.now()).getFullYear(), query.month - 1, 1);
 	var type = query.type;
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
-		console.log("getting movements of type" + type + " from month" + d.getMonth());
+		console.log("getting movements of type" + type + " from month" + query.month);
 		var sql = "SELECT typeID, name, movementDate, amount FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
 		var params = [type, startdate, enddate];
 
