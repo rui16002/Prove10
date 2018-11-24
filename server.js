@@ -41,8 +41,9 @@ function addMovement(req, res) {
 	var date = query.date;
 	var name = query.name;
 	var amount = query.amount;
-	console.log("Adding movement: " + name);
-	var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
+	console.log("Adding movement: " + query);
+	res.end();
+	/*var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
 	var params = [type, name, date, amount];
 
 	dbTransaction(sql, params, function(error, result) {
@@ -53,7 +54,7 @@ function addMovement(req, res) {
 			console.log(JSON.stringify(result));
             res.end();
 		}
-	})
+	})*/
 }
 /* ----- getMovement----------------------------------- 
 Data from client: Month, Type
