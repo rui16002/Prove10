@@ -47,23 +47,43 @@ function isValidDate(d){
 	var month = vd.getMonth();
 	var day = vd.getDate();
 	const date = new Date(`${year}-${month + 1}-${day}`);
-	return (Boolean(+date) && date.getDate().toString() === day.toString());
+	if (Boolean(+date) && date.getDate().toString() === day.toString()) {
+		return true;
+	}
+	console.log("invalid date: " + d);
+	return false;
 }
 
 function isValidType(t){
-	return ((isInt(t) == true) && (t >= 0) && (t <= 7) && (t != null) && (t != "undefined"));
+	if ((isInt(t) == true) && (t >= 0) && (t <= 7) && (t != null) && (t != "undefined")) {
+		return true;
+	}
+	console.log("invalid type: " + t);
+	return false;
 }
 
 function isValidName(n){
-	return ((n != null) && (n != "undefined"));
+	if ((n != null) && (n != "undefined")) {
+		return true;
+	}
+	console.log("invalid name: " + n);
+	return false;
 }
 
 function isValidAmount(a){
-	return ((isFloat(a) == true) && (a >= 0) && (a != null) && (a != "undefined"));
+	if ((isFloat(a) == true) && (a >= 0) && (a != null) && (a != "undefined")) {
+		return true;
+	}
+	console.log("invalid amount: " + a);
+	return false;
 }
 
 function isValidID(i){
-	return ((isInt(i) == true) && (i >= 0) && (i != null) && (i != "undefined"));
+	if ((isInt(i) == true) && (i >= 0) && (i != null) && (i != "undefined")) {
+		return true;
+	}
+	console.log("invalid ID: " + i);
+	return false;
 }
 
 /* ----- addMovement-----------------------------------
