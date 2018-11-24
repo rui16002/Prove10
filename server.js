@@ -41,7 +41,7 @@ function addMovement(req, res) {
 	var date = query.date;
 	var name = query.name;
 	var amount = query.amount;
-	console.log("Adding movement: " + );
+	console.log("Adding movement: " + name);
 	var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
 	var params = [type, name, date, amount];
 
