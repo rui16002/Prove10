@@ -47,6 +47,7 @@ function isValidDate(d){
 	var month = vd.getMonth();
 	var day = vd.getDate();
 	const date = new Date(`${year}-${month}-${day}`);
+	console.log((Boolean(+date) && date.getDate().toString() === day));
 	return (Boolean(+date) && date.getDate().toString() === day);
 }
 
