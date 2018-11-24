@@ -50,19 +50,19 @@ function isValidDate(d){
 }
 
 function isValidType(t){
-	return ((isInt(t) == true) AND (t >= 0) AND (t <= 7) AND (t != null) AND (t != "undefined"));
+	return ((isInt(t) == true) && (t >= 0) && (t <= 7) && (t != null) && (t != "undefined"));
 }
 
 function isValidName(n){
-	return ((n != null) AND (n != "undefined"));
+	return ((n != null) && (n != "undefined"));
 }
 
 function isValidAmount(a){
-	return ((isFloat(a) == true) AND (a >= 0) AND (a != null) AND (a != "undefined"));
+	return ((isFloat(a) == true) && (a >= 0) && (a != null) && (a != "undefined"));
 }
 
 function isValidID(i){
-	return ((isInt(i) == true) AND (i >= 0) AND (i != null) AND (i != "undefined"));
+	return ((isInt(i) == true) && (i >= 0) && (i != null) && (i != "undefined"));
 }
 
 /* ----- addMovement-----------------------------------
@@ -75,7 +75,7 @@ function addMovement(req, res) {
 	var date = query.date;
 	var name = query.name;
 	var amount = query.amount;
-	if (isValidType(type) AND isValidDate(date) AND isValidName(name)) {
+	if (isValidType(type) && isValidDate(date) && isValidName(name)) {
 		console.log("Adding movement: " + name);
 		var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
 		var params = [type, name, date, amount];
@@ -104,7 +104,7 @@ function getMovement(req, res) {
 	var enddate = '2018/'+ query.month +'/' + d.getDate();
 	var startdate = '2018/' + query.month + '/01';
 	var type = query.type;
-	if (isValidDate(startdate) AND isValidDate(enddate) AND isValidType(type)) {
+	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting movements of type" + type + " from month" + d.getMonth());
 		var sql = "SELECT typeID, name, movementDate, amount FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
 		var params = [type, startdate, enddate];
@@ -157,7 +157,7 @@ function getTotal(req, res) {
 	var startdate = '2018/' + query.month + '/01';
 	var type = query.type;
 
-	if (isValidDate(startdate) AND isValidDate(enddate) AND isValidType(type)) {
+	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting sum of movements from type: " + type);
 		var sql = "SELECT SUM(amount) FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
 		var params = [type, startdate, enddate];
@@ -186,7 +186,7 @@ function modifyMovement(req, res) {
 	var name = query.name;
 	var date = query.date;
 	var amount = query.amount;
-	if (isValidID(movementID) AND isValidType(type) AND isValidName(name) AND isValidDate(date) AND isValidAmount(amount)) {
+	if (isValidID(movementID) && isValidType(type) && isValidName(name) && isValidDate(date) && isValidAmount(amount)) {
 		console.log("Modifying movement: "+ name);
 		var sql = "UPDATE movements SET typeID = $1, name = $2, movementDate = $3, amount = $4 WHERE movementID = $5";
 		var params = [type, name, date, amount, movementID];
