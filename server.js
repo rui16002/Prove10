@@ -42,11 +42,17 @@ function isFloat(n){
 }
 
 function isValidDate(d){
+	console.log(d);
 	var vd = new Date(d);
+	console.log(vd);
 	var year = vd.getFullYear();
+	console.log(year);
 	var month = vd.getMonth();
+	console.log(month);
 	var day = vd.getDate();
+	console.log(day);
 	const date = new Date(`${year}-${month}-${day}`);
+	console.log(date);
 	console.log((Boolean(+date) && date.getDate().toString() === day));
 	return (Boolean(+date) && date.getDate().toString() === day);
 }
