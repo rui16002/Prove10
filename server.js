@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 const { Pool } = require("pg");
@@ -8,6 +9,8 @@ const pool = new Pool({connectionString: connectionString});
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //Use POST method here
 app.post('/AddMovement', addMovement);
@@ -33,13 +36,13 @@ Data from client: type, date, name, amount
 Data returned: ExpenseID or null
 -------------------------------------------------------*/
 function addMovement(req, res) {
-	var query = req.query;
+	var query = req.body;
 	var type = query.type;
 	var date = query.date;
 	var name = query.name;
 	var amount = query.amount;
-	console.log("Adding movement: " + JSON.stringify(req));
-	/*var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
+	console.log("Adding movement: " + );
+	var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
 	var params = [type, name, date, amount];
 
 	dbTransaction(sql, params, function(error, result) {
@@ -47,9 +50,10 @@ function addMovement(req, res) {
 			res.writeHead(500);
 		} else {
 			res.writeHead(200, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify(result));
+			console.log(JSON.stringify(result));
+            res.end();
 		}
-	})*/
+	})
 }
 /* ----- getMovement----------------------------------- 
 Data from client: Month, Type
