@@ -31,16 +31,6 @@ app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
 });
 
-//https://gist.github.com/rutcreate/03ff3f9bd5f414465322
-function isInt(n){
-	return Number(n).toString() === n.toString() && n % 1 === 0;
-}
-
-//https://gist.github.com/rutcreate/03ff3f9bd5f414465322
-function isFloat(n){
-	return Number(n).toString() === n.toString() && n % 1 !== 0;
-}
-
 function isValidDate(d){
 	var vd = new Date(d);
 	var year = vd.getFullYear();
@@ -55,7 +45,7 @@ function isValidDate(d){
 }
 
 function isValidType(t){
-	if ((isInt(t) == true) && (t >= 0) && (t <= 7) && (t != null) && (t != "undefined")) {
+	if (!(isNaN(parseInt(t))) && (t >= 0) && (t <= 7) && (t != null) && (typeof t != "undefined")) {
 		return true;
 	}
 	console.log("invalid type: " + t);
@@ -63,7 +53,7 @@ function isValidType(t){
 }
 
 function isValidName(n){
-	if ((n != null) && (n != "undefined")) {
+	if ((n != null) && (typeof n != "undefined")) {
 		return true;
 	}
 	console.log("invalid name: " + n);
@@ -71,7 +61,7 @@ function isValidName(n){
 }
 
 function isValidAmount(a){
-	if ((isFloat(a) == true) && (a >= 0) && (a != null) && (a != "undefined")) {
+	if (!(isNaN(parseFloat(a))) && (a >= 0) && (a != null) && (typeof a != "undefined")) {
 		return true;
 	}
 	console.log("invalid amount: " + a);
@@ -79,7 +69,7 @@ function isValidAmount(a){
 }
 
 function isValidID(i){
-	if ((isInt(i) == true) && (i >= 0) && (i != null) && (i != "undefined")) {
+	if (!(isNaN(parseInt(i))) && (i >= 0) && (i != null) && (typeof i != "undefined")) {
 		return true;
 	}
 	console.log("invalid ID: " + i);
