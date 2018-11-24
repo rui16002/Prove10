@@ -54,7 +54,7 @@ function isValidDate(d){
 	const date = new Date(`${year}-${month + 1}-${day}`);
 	console.log("date is: " + date);
 	console.log("validation is: " + (Boolean(+date) && date.getDate().toString() === day));
-	return (Boolean(+date) && date.getDate().toString() === day);
+	return (Boolean(+date) && date.getDate().toString() === day.toString());
 }
 
 function isValidType(t){
