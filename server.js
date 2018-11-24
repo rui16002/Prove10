@@ -42,18 +42,18 @@ function isFloat(n){
 }
 
 function isValidDate(d){
-	console.log(d);
+	console.log("d is: " + d);
 	var vd = new Date(d);
-	console.log(vd);
+	console.log("vd is: " + vd);
 	var year = vd.getFullYear();
-	console.log(year);
+	console.log("year is: " + year);
 	var month = vd.getMonth();
-	console.log(month);
+	console.log("month is: " + month);
 	var day = vd.getDate();
-	console.log(day);
+	console.log("day is: " + day);
 	const date = new Date(`${year}-${month}-${day}`);
-	console.log(date);
-	console.log((Boolean(+date) && date.getDate().toString() === day));
+	console.log("date is: " + date);
+	console.log("validation is: " + (Boolean(+date) && date.getDate().toString() === day));
 	return (Boolean(+date) && date.getDate().toString() === day);
 }
 
@@ -109,7 +109,7 @@ Data returned: List of Expenses for the given type
 function getMovement(req, res) {
 	var query = req.query;
 	var enddate = new Date(new Date(Date.now()).getFullYear(), query.month, 0);
-	var startdate = new Date(new Date(Date.now()).getFullYear(), query.month, 1);
+	var startdate = new Date(new Date(Date.now()).getFullYear(), query.month - 1, 1);
 	var type = query.type;
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting movements of type" + type + " from month" + d.getMonth());
