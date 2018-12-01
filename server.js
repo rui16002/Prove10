@@ -93,10 +93,10 @@ function addMovement(req, res) {
 
 		dbTransaction(sql, params, function(error, result) {
 			if (error || result == null) {
-				res.writeHead(500);
+				res.writeHead(500).json({success: false, data: error});
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-				res.json({success: true});
+                res.end(JSON.stringify({success: true}));
 			}
 		})
 	}
