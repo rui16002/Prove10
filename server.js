@@ -147,7 +147,7 @@ function getAvg(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: result.rows});
+				res.status(200).json({success: true, type:type, total: result.rows[0].avg});
 			}
 		})
 	}
@@ -176,7 +176,7 @@ function getTotal(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: result.rows});
+				res.status(200).json({success: true, type:type, total: result.rows[0].sum});
 			}
 		})
 	}
