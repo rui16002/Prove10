@@ -96,8 +96,7 @@ function addMovement(req, res) {
 				res.writeHead(500);
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-				res.send({success: true});
-				res.end();
+				res.json({success: true});
 			}
 		})
 	}
