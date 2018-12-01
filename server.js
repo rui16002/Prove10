@@ -121,11 +121,9 @@ function getMovement(req, res) {
 
 		dbTransaction(sql, params, function(error, result) {
 			if (error || result == null) {
-				res.writeHead(200, {'Content-Type': 'application/json'});
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.writeHead(200, {'Content-Type': 'application/json'});
-				res.status(200).json(result);
+				res.status(200).json(JSON.encode(result));
 			}
 		})
 	}
