@@ -136,6 +136,12 @@ function getMovement(req, res) {
 Data from client: Type
 Data returned: Avg expense on a given category
 -------------------------------------------------------*/
+function denull(data){
+	if (!data) 
+		return 0;
+	return data;
+}
+
 function getAvg(req, res) {
 	var type = req.query.type;
 	if (isValidType(type)) {
@@ -147,7 +153,7 @@ function getAvg(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: result[0].avg});
+				res.status(200).json({success: true, type:type, total: denull(result[0].avg)});
 			}
 		})
 	}
@@ -176,7 +182,7 @@ function getTotal(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: result[0].sum});
+				res.status(200).json({success: true, type:type, total: denull(result[0].sum)});
 			}
 		})
 	}
