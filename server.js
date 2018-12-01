@@ -96,7 +96,7 @@ function addMovement(req, res) {
 				res.writeHead(500);
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-				res.end({success: true, data: result});
+				res.end({success: true});
 			}
 		})
 	}
@@ -205,7 +205,7 @@ function modifyMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, data: result});
+				res.status(200).json({success: true, movementID: movementID});
 			}
 		})
 	}
@@ -228,7 +228,7 @@ function deleteMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true});
+				res.status(200).json({success: true, movementID: movementID});
 			}
 		})
 	}
