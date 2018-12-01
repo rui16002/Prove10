@@ -228,7 +228,7 @@ function deleteMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, data: result});
+				res.status(200).json({success: true});
 			}
 		})
 	}
