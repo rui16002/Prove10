@@ -96,7 +96,7 @@ function addMovement(req, res) {
 				res.writeHead(500);
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-				res.end({success: true, data: JSON.parse(result.rows)});
+				res.end({success: true, data: result.rows});
 			}
 		})
 	}
@@ -123,7 +123,7 @@ function getMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, data: JSON.parse(result.rows)});
+				res.status(200).json({success: true, data: result.rows});
 			}
 		})
 	}
