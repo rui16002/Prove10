@@ -82,7 +82,7 @@ Data returned: ExpenseID or null
 -------------------------------------------------------*/
 function addMovement(req, res) {
 	var query = req.body;
-	var type = query.type;
+	var type = query.type + 1;
 	var date = query.date;
 	var name = query.name;
 	var amount = query.amount;
@@ -113,7 +113,7 @@ function getMovement(req, res) {
 	var query = req.query;
 	var enddate = new Date(new Date(Date.now()).getFullYear(), query.month, 0);
 	var startdate = new Date(new Date(Date.now()).getFullYear(), query.month - 1, 1);
-	var type = query.type;
+	var type = query.type + 1;
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting movements of type " + type + " from month " + query.month);
 		var sql = "SELECT movementID, typeID, name, movementDate, amount FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
@@ -143,7 +143,7 @@ function denull(data){
 }
 
 function getAvg(req, res) {
-	var type = req.query.type;
+	var type = req.query.type + 1;
 	if (isValidType(type)) {
 		console.log("Getting avg from type: " + type);
 		var sql = "SELECT AVG(amount) FROM movements WHERE typeID = $1";
@@ -171,7 +171,7 @@ function getTotal(req, res) {
 	var d = new Date(2018, query.month, 0);
 	var enddate = '2018/'+ query.month +'/' + d.getDate();
 	var startdate = '2018/' + query.month + '/01';
-	var type = query.type;
+	var type = query.type + 1;
 
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting sum of movements from type: " + type);
@@ -198,7 +198,7 @@ Data returned: true/false depending on successful modification
 function modifyMovement(req, res) {
 	var query = req.query;
 	var movementID = query.movementID;
-	var type = query.type;
+	var type = query.type + 1;
 	var name = query.name;
 	var date = query.date;
 	var amount = query.amount;
