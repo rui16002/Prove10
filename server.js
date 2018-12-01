@@ -96,7 +96,7 @@ function addMovement(req, res) {
 				res.writeHead(500);
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-				res.end(JSON.stringify(result));
+				res.end({success: true, data: JSON.parse(result.rows)});
 			}
 		})
 	}
@@ -123,7 +123,7 @@ function getMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json(result);
+				res.status(200).json({success: true, data: JSON.parse(result.rows)});
 			}
 		})
 	}
@@ -147,7 +147,7 @@ function getAvg(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json(result);
+				res.status(200).json({type:type, total: result[0].avg});
 			}
 		})
 	}
@@ -176,7 +176,7 @@ function getTotal(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json(result);
+				res.status(200).json({type:type, total: result[0].sum});
 			}
 		})
 	}
@@ -205,7 +205,7 @@ function modifyMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json(result);
+				res.status(200).json({success: true, data: result});
 			}
 		})
 	}
@@ -228,7 +228,7 @@ function deleteMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json(result);
+				res.status(200).json({success: true, data: result});
 			}
 		})
 	}
@@ -245,7 +245,7 @@ function dbTransaction(sql, params, callback) {
 			callback(err, null);
 		}
 		console.log("Transaction successful: " + result);
-		callback(null, result.rows);
+		callback(null, result);
 	});
 
 }
