@@ -244,7 +244,7 @@ function dbTransaction(sql, params, callback) {
 			console.log("Transaction failed: " + err);
 			callback(err, null);
 		}
-		console.log("Transaction successful: " + JSON.stringify(result));
+		console.log("Transaction successful: " + JSON.stringify(result.rows));
 		callback(null, result.rows);
 	});
 
