@@ -123,7 +123,7 @@ function getMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, data: result.rows});
+				res.status(200).json({success: true, data: result});
 			}
 		})
 	}
@@ -147,7 +147,7 @@ function getAvg(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: result.rows[0].avg});
+				res.status(200).json({success: true, type:type, total: result[0].avg});
 			}
 		})
 	}
@@ -176,7 +176,7 @@ function getTotal(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: result.rows[0].sum});
+				res.status(200).json({success: true, type:type, total: result[0].sum});
 			}
 		})
 	}
@@ -245,7 +245,7 @@ function dbTransaction(sql, params, callback) {
 			callback(err, null);
 		}
 		console.log("Transaction successful: " + JSON.stringify(result));
-		callback(null, result);
+		callback(null, result.rows);
 	});
 
 }
