@@ -8,7 +8,7 @@ const connectionString = process.env.DATABASE_URL || "postgres://efxluiqvrhrgzy:
 const pool = new Pool({connectionString: connectionString});
 
 app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
