@@ -45,7 +45,7 @@ function isValidDate(d){
 }
 
 function isValidType(t){
-	if (!(isNaN(parseInt(t))) && (t >= 0) && (t <= 7) && (t != null) && (typeof t != "undefined")) {
+	if (!(isNaN(parseInt(t))) && (t >= 1) && (t <= 8) && (t != null) && (typeof t != "undefined")) {
 		return true;
 	}
 	console.log("invalid type: " + t);
