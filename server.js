@@ -146,7 +146,7 @@ function denull(data){
 
 function getAvg(req, res) {
 	var type = parseInt(req.query.type) + 1;
-	var type0 = query.type;
+	var type0 = req.query.type;
 	if (isValidType(type)) {
 		console.log("Getting avg from type: " + type);
 		var sql = "SELECT AVG(amount) FROM movements WHERE typeID = $1";
