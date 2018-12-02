@@ -83,6 +83,7 @@ Data returned: ExpenseID or null
 function addMovement(req, res) {
 	var query = req.body;
 	var type = parseInt(query.type) + 1;
+	var type0 = query.type;
 	var date = query.date;
 	var name = query.name;
 	var amount = query.amount;
@@ -96,7 +97,7 @@ function addMovement(req, res) {
 				res.writeHead(500).json({success: false, data: error});
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({success: true, type: type}));
+                res.end(JSON.stringify({success: true, type: type0}));
 			}
 		})
 	}
@@ -114,6 +115,7 @@ function getMovement(req, res) {
 	var enddate = new Date(new Date(Date.now()).getFullYear(), query.month, 0);
 	var startdate = new Date(new Date(Date.now()).getFullYear(), query.month - 1, 1);
 	var type = parseInt(query.type) + 1;
+	var type0 = query.type;
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting movements of type " + type + " from month " + query.month);
 		var sql = "SELECT movementID, typeID, name, movementDate, amount FROM movements WHERE typeID = $1 AND movementDate BETWEEN $2 AND $3";
@@ -144,6 +146,7 @@ function denull(data){
 
 function getAvg(req, res) {
 	var type = parseInt(req.query.type) + 1;
+	var type0 = query.type;
 	if (isValidType(type)) {
 		console.log("Getting avg from type: " + type);
 		var sql = "SELECT AVG(amount) FROM movements WHERE typeID = $1";
@@ -153,7 +156,7 @@ function getAvg(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, avg: denull(result[0].avg)});
+				res.status(200).json({success: true, type:type0, avg: denull(result[0].avg)});
 			}
 		})
 	}
@@ -172,6 +175,7 @@ function getTotal(req, res) {
 	var enddate = '2018/'+ query.month +'/' + d.getDate();
 	var startdate = '2018/' + query.month + '/01';
 	var type = parseInt(query.type) + 1;
+	var type0 = query.type;
 
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting sum of movements from type: " + type);
@@ -182,7 +186,7 @@ function getTotal(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, type:type, total: denull(result[0].sum)});
+				res.status(200).json({success: true, type:type0, total: denull(result[0].sum)});
 			}
 		})
 	}
@@ -199,6 +203,7 @@ function modifyMovement(req, res) {
 	var query = req.query;
 	var movementID = query.movementID;
 	var type = parseInt(query.type) + 1;
+	var type0 = query.type;
 	var name = query.name;
 	var date = query.date;
 	var amount = query.amount;
@@ -211,7 +216,7 @@ function modifyMovement(req, res) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, movementID: movementID});
+				res.status(200).json({success: true, type: type0, movementID: movementID});
 			}
 		})
 	}
