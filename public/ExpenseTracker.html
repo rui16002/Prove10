@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Node Proyect</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="display.js"></script>
+	<script src="reqHandler.js"></script>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-sm-12 text-center">
+			<h1>Expense Tracker</h1>
+		</div>	
+		<div class="col-sm-9">
+			<div id="cat-bar-container" class="col-sm-12 cat-bar-container">
+			</div>
+			<!-- /container-expenses -->
+			<div class="col-sm-12 table-container">
+				<table>
+					<thead>
+						<tr>
+							<th class="text-center">
+								<span>ID</span>
+							</th>
+							<th class="text-center">
+								<span>Date</span>
+							</th>
+							<th class="text-center">
+								<span>Category</span>
+							</th>
+							<th class="text-center">
+								<span>Description</span>
+							</th>
+							<th class="text-center">
+								<span>Amount</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="table_rows">
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="form_container col-sm-3">
+			<div class="btn-group btn-group-justified">
+				<a onclick="alterForm('add');" class="btn btn-primary">Add</a>
+				<a onclick="alterForm('mod');" class="btn btn-primary">Modify</a>
+				<a onclick="alterForm('del');" class="btn btn-primary">Delete</a>
+			</div>
+			<form>
+				<div class="form-group">
+					<label for="m_ID">Movement ID</label>
+					<input class="form-control" type="number" min="0" step="1" name="m_ID" id="m_ID">
+				</div>
+				<div class="form-group">
+					<label for="m_type">Movement Type</label>
+					<select class="form-control" name="type" id="m_type">
+						<option value="0">Income</option> glyphicon-piggy-bank
+						<option value="1">Donations</option>glyphicon-gift
+						<option value="2">Education</option> <!--glyphicon-education-->
+						<option value="3">Transportation</option> glyphicon-road
+						<option value="4">Loans</option>glyphicon-briefcase
+						<option value="5">Credit cards</option> glyphicon-credit-card
+						<option value="6">Health</option> glyphicon-heart
+						<option value="7">Home</option> glyphicon-home
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="m_name">Movement Name</label>
+					<input class="form-control" type="text" name="m_name" id="m_name">
+				</div>
+				<div class="form-group">
+					<label for="m_date">Movement Date</label>
+					<input class="form-control" type="date" name="m_date" id="m_date">
+				</div>
+				<div class="form-group">
+					<label for="m_amount">Movement Amount</label>
+					<input class="form-control" type="number" step="0.1" min="0" name="m_amount" id="m_amount">
+				</div>
+				<button id="btn_add" type="button" class="btn btn-default" onclick="addMovement()">Add</button>
+				<button id="btn_mod" type="button" class="btn btn-default" onclick="modifyMovement()">Modify</button>
+				<button id="btn_del" type="button" class="btn btn-default" onclick="deleteMovement()">Delete</button>
+			</form> 
+		</div>
+		<div id="demo"></div>
+	</div>
+	<script type="text/javascript">
+		var container = document.getElementById("cat-bar-container");
+        var month = 8;
+		for (var type = 0; type <= 7; type++) {
+			container.appendChild(addNewBar(type));
+			getMovement(month,type);
+			getAvg(type);
+			getTotal(month, type);
+		}
+
+		function updateTable(data){
+			var container = document.getElementById("table_rows");
+			if (data && data.length > 0){
+				for (var i = data.length - 1; i >= 0; i--) {
+					console.log("row " + JSON.stringify(i));
+					container.appendChild(addNewRow(data[i]));
+				}
+			}
+		}
+
+		function updateBarTotal(name,total){
+			var barAmount = document.getElementById('cat-bar-total-'+name);
+			barAmount.style.width = barScale(total)+"%";
+			var barAmountTxt = document.createTextNode(total+"€");
+			var barAmountspan = document.getElementById('cat-bar-amount-'+name);
+			barAmountspan.innerHTML = '';
+			barAmountspan.appendChild(barAmountTxt);
+		}
+
+		function updateBarAvg(name,avg){
+			var barBenchmark = document.getElementById('cat-bar-benchmark-'+name);
+			barBenchmark.style.width = barScale(avg)+"%";
+			var barBenchmarkTxt = document.createTextNode(avg+"€");
+			var barBenchmarkspan = document.getElementById('cat-bar-avg-'+name);
+			barBenchmarkspan.innerHTML = '';
+			barBenchmarkspan.appendChild(barBenchmarkTxt);
+		}
+	</script>
+	<script src="formUpdate.js"></script>
+</body>
+</html>

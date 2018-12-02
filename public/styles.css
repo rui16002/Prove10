@@ -1,0 +1,61 @@
+.form_container {
+    background: antiquewhite;
+    padding: 5px;
+    box-shadow: 0 0px 10px 0 rgba(0,0,0,0.2);
+}
+
+.table-container {
+    background: azure;
+    padding: 1em;
+    margin-top: 1em;
+    box-shadow: 0 0px 10px 0 rgba(0,0,0,0.2);
+}
+
+.cat-bar-container{
+    background: whitesmoke;
+    padding: 1px;    
+    box-shadow: 0 0px 5px 0 rgba(0,0,0,0.2);
+}
+
+.cat-bar-amount {
+	color: white;
+}
+
+.cat-bar-avg {
+	padding: 0 3px 0;
+    color: darkgrey;
+    border-right: 1px solid crimson;
+}
+
+.cat-bar-total {
+	background: crimson;	
+    border-radius: 3px;
+    padding-right: 2px;
+}
+
+.cat-bar-item {
+    margin: 0.2em;
+}
+
+td, th {
+    padding: 3px;
+    border: 1px solid darkgrey;
+}
+
+table {
+    width: 100%;
+    margin-top: 1em;
+}
+
+th {
+    height: 40px;
+}
+
+form {
+	    margin-right: 1em;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
