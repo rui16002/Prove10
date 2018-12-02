@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-router.get('/', function (req, res) {
+app.get('/', function (req, res) {
   res.redirect('/ExpenseTracker.html')
 })
 
