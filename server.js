@@ -20,10 +20,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/', function (req, res) {
-  res.redirect('/ExpenseTracker.html');
-})
-
 //Use POST method here
 app.post('/AddMovement', addMovement);
 
