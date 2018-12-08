@@ -15,9 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //https://stackoverflow.com/questions/20035101/why-does-my-javascript-get-a-no-access-control-allow-origin-header-is-present
 //Not to be used in production
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 });
 
 //Use POST method here
@@ -105,7 +105,7 @@ function addMovement(req, res) {
 				res.writeHead(500).json({success: false, data: error});
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({success: true, type: type0, movementID: result[0].movementid}));
+				res.end(JSON.stringify({success: true, type: type0, movementID: result[0].movementid}));
 			}
 		})
 	}
@@ -243,26 +243,21 @@ function deleteMovement(req, res) {
 	if (isValidID(movementID)) {
 		console.log("Deleting movement: " + movementID);
 
-
-pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(serr, sresult) {
-		if (serr) {
-			res.status(500).json({success: false, data: serr});
-		}
-		typeID = sresult.rows[0].typeid;
-
-console.log("Type id out of pool query:"+typeID);
-
-		res.status(200).json({success: true, data: typeID});
-		/*var sql = "DELETE FROM movements WHERE movementID = $1";
-		var params = [movementID];
-		dbTransaction(sql, params, function(error, result) {
-			if (error || result == null) {
-				res.status(500).json({success: false, data: error});
-			} else {
-				res.status(200).json({success: true, movementID: movementID, typeID: typeID});
+		pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(serr, sresult) {
+			if (serr) {
+				res.status(500).json({success: false, data: serr});
 			}
-		})*/
-			});
+			typeID = sresult.rows[0].typeid;
+			var sql = "DELETE FROM movements WHERE movementID = $1";
+			var params = [movementID];
+			dbTransaction(sql, params, function(error, result) {
+				if (error || result == null) {
+					res.status(500).json({success: false, data: error});
+				} else {
+					res.status(200).json({success: true, movementID: movementID, typeID: typeID});
+				}
+			})
+		});
 	}
 	else
 	{
