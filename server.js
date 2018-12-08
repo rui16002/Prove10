@@ -247,14 +247,14 @@ function deleteMovement(req, res) {
 			if (serr) {
 				res.status(500).json({success: false, data: serr});
 			}
-			typeID = sresult.rows[0].typeid;
+			typeID = (sresult.rows[0].typeid) - 1;
 			var sql = "DELETE FROM movements WHERE movementID = $1";
 			var params = [movementID];
 			dbTransaction(sql, params, function(error, result) {
 				if (error || result == null) {
 					res.status(500).json({success: false, data: error});
 				} else {
-					res.status(200).json({success: true, movementID: movementID, typeID: typeID});
+					res.status(200).json({success: true, movementID: movementID, type: typeID});
 				}
 			})
 		});
