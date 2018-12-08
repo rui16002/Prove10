@@ -244,11 +244,14 @@ function deleteMovement(req, res) {
 		console.log("Deleting movement: " + movementID);
 
 
-pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(err, result) {
-		if (err) {
-			res.status(500).json({success: false, data: err});
+pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(serr, sresult) {
+		if (serr) {
+			res.status(500).json({success: false, data: serr});
 		}
-		typeID = result.rows.typeID;
+		typeID = sresult.rows.typeID;
+		console.log(sresult);
+		console.log(sresult.rows);
+		console.log(sresult.rows.typeID);
 	});
 
 		var sql = "DELETE FROM movements WHERE movementID = $1";
