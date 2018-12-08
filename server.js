@@ -97,7 +97,7 @@ function addMovement(req, res) {
 	var amount = query.amount;
 	if (isValidType(type) && isValidDate(date) && isValidName(name)) {
 		console.log("Adding movement: " + name);
-		var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4)";
+		var sql = "INSERT INTO movements(typeID, name, movementDate, amount) VALUES ($1, $2, $3, $4) returning movementID";
 		var params = [type, name, date, amount];
 
 		dbTransaction(sql, params, function(error, result) {
@@ -105,7 +105,7 @@ function addMovement(req, res) {
 				res.writeHead(500).json({success: false, data: error});
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({success: true, type: type0}));
+                res.end(JSON.stringify({success: true, type: type0, movementID: result[0].movementID}));
 			}
 		})
 	}
