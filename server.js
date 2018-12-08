@@ -247,6 +247,7 @@ function deleteMovement(req, res) {
 			if (serr || sresult.rows[0] == 'undefined') {
 				res.status(500).json({success: false, data: serr});
 			}
+			console.log(sresult.rows[0] == 'undefined');
 			typeID = (sresult.rows[0].typeid) - 1;
 			var sql = "DELETE FROM movements WHERE movementID = $1";
 			var params = [movementID];
