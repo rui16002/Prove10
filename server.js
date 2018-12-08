@@ -248,7 +248,7 @@ pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], f
 		if (err) {
 			res.status(500).json({success: false, data: err});
 		}
-		typeID = result.rows.typeID);
+		typeID = result.rows.typeID;
 	});
 
 		var sql = "DELETE FROM movements WHERE movementID = $1";
