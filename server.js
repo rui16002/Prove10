@@ -239,15 +239,25 @@ Data returned: true/false depending on successful deletion
 -------------------------------------------------------*/
 function deleteMovement(req, res) {
 	var movementID = req.query.movementID;
+	var typeID;
 	if (isValidID(movementID)) {
 		console.log("Deleting movement: " + movementID);
+
+
+pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(err, result) {
+		if (err) {
+			res.status(500).json({success: false, data: err});
+		}
+		typeID = result.rows.typeID);
+	});
+
 		var sql = "DELETE FROM movements WHERE movementID = $1";
 		var params = [movementID];
 		dbTransaction(sql, params, function(error, result) {
 			if (error || result == null) {
 				res.status(500).json({success: false, data: error});
 			} else {
-				res.status(200).json({success: true, movementID: movementID});
+				res.status(200).json({success: true, movementID: movementID, typeID: typeID});
 			}
 		})
 	}
