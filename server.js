@@ -249,11 +249,10 @@ pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], f
 			res.status(500).json({success: false, data: serr});
 		}
 		typeID = sresult.rows[0].typeid;
-		res.status(200).json({success: true, data: typeID});
-		callback(null, sresult.rows);
-	});
 
 console.log("Type id out of pool query:"+typeID);
+
+		res.status(200).json({success: true, data: typeID});
 		/*var sql = "DELETE FROM movements WHERE movementID = $1";
 		var params = [movementID];
 		dbTransaction(sql, params, function(error, result) {
@@ -263,6 +262,7 @@ console.log("Type id out of pool query:"+typeID);
 				res.status(200).json({success: true, movementID: movementID, typeID: typeID});
 			}
 		})*/
+			});
 	}
 	else
 	{
