@@ -248,7 +248,7 @@ pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], f
 		if (serr) {
 			res.status(500).json({success: false, data: serr});
 		}
-		typeID = sresult.rows.[0].typeID;
+		typeID = sresult.rows[0].typeID;
 			res.status(500).json({success: false, data: typeID});
 	});
 
