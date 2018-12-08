@@ -248,7 +248,7 @@ function deleteMovement(req, res) {
 				res.status(500).json({success: false, data: serr});
 			}
 			else if (sresult.rows.length == 0) {
-				res.status(500).json({success: false, data: movementid+" does not exist or has already been deleted"});
+				res.status(500).json({success: false, data: movementID+" does not exist or has already been deleted"});
 			}
 			typeID = (sresult.rows[0].typeid) - 1;
 			var sql = "DELETE FROM movements WHERE movementID = $1";
