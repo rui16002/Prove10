@@ -244,8 +244,11 @@ function deleteMovement(req, res) {
 		console.log("Deleting movement: " + movementID);
 
 		pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(serr, sresult) {
-			if (serr || sresult.rows.length == 0) {
+			if (serr) {
 				res.status(500).json({success: false, data: serr});
+			}
+			else if (sresult.rows.length == 0) {
+				res.status(500).json({success: false, data: movementid+" does not exist or has already been deleted"});
 			}
 			typeID = (sresult.rows[0].typeid) - 1;
 			var sql = "DELETE FROM movements WHERE movementID = $1";
