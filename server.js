@@ -244,7 +244,7 @@ function deleteMovement(req, res) {
 		console.log("Deleting movement: " + movementID);
 
 		pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], function(serr, sresult) {
-			if (serr) {
+			if (serr || result == null) {
 				res.status(500).json({success: false, data: serr});
 			}
 			typeID = (sresult.rows[0].typeid) - 1;
