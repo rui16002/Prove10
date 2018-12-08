@@ -126,7 +126,7 @@ function getMovement(req, res) {
 	var type0 = query.type;
 	if (isValidDate(startdate) && isValidDate(enddate) && isValidType(type)) {
 		console.log("getting movements of type " + type + " from month " + query.month);
-		var sql = "SELECT m.movementID, t.name, m.name, m.movementDate, m.amount FROM movements m INNER JOIN types t ON t.typeID = m.typeID WHERE t.typeID = $1 AND m.movementDate BETWEEN $2 AND $3";
+		var sql = "SELECT m.movementID, t.name as type, m.name, m.movementDate, m.amount FROM movements m INNER JOIN types t ON t.typeID = m.typeID WHERE t.typeID = $1 AND m.movementDate BETWEEN $2 AND $3";
 		var params = [type, startdate, enddate];
 
 		dbTransaction(sql, params, function(error, result) {
