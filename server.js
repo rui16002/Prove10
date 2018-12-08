@@ -249,12 +249,12 @@ pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], f
 			res.status(500).json({success: false, data: serr});
 		}
 		typeID = sresult.rows.typeID;
-		console.log(sresult);
-		console.log(sresult.rows);
-		console.log(sresult.rows.typeID);
+		console.log("Result" + sresult);
+		console.log("Rows" + sresult.rows);
+		console.log("Type" + sresult.rows.typeID);
 	});
 
-		var sql = "DELETE FROM movements WHERE movementID = $1";
+		/*var sql = "DELETE FROM movements WHERE movementID = $1";
 		var params = [movementID];
 		dbTransaction(sql, params, function(error, result) {
 			if (error || result == null) {
@@ -262,7 +262,7 @@ pool.query("SELECT typeID FROM movements WHERE movementID = $1", [movementID], f
 			} else {
 				res.status(200).json({success: true, movementID: movementID, typeID: typeID});
 			}
-		})
+		})*/
 	}
 	else
 	{
