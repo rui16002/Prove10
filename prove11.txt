@@ -1,0 +1,35 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+1. Project Title / One sentence description:
+Expense tracker
+
+2. Copy and paste the URL for your web application (if applicable):
+https://desolate-reaches-83720.herokuapp.com/ExpenseTracker.html
+
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/rui16002/Prove10
+
+4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
+Most of the application is working, with a lot of bugs, while I was building the front end I realized some missing feature in my endpoints which I have been adding.
+The interfase is not very friendly either.
+I can update, delete and add but there is a lot of work to do, the code seems prety messy as it is.
+
+5. Describe the features that are not yet working correctly.
+I get duplicates in the table when updating
+date format needs to be modified as well as icon, css and type
+date selector in form can also be improved.
+
+6. Please select the category you feel best describes your assignment:
+A - Some attempt was made
+B - Developing, but significantly deficient
+C - Slightly deficient, but still mostly adequate
+XD - Meets requirements
+E - Shows creativity and excels above and beyond requirements
+
+
+7. Provide a brief justification (1-2 sentences) for selecting that category.
+althou is not yet working 100% it meets requirements, since instructions mentioned just that.
+
+8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
+I started using vanilla js but then I noticed it is a lot easier using jquery, just mention that if I finish what I
+mentioned above, I will try to rewrite vanilla js to jquery.

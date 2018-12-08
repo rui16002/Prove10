@@ -1,61 +1,81 @@
 var rows;
 
+/************************************************
+Callback for Add operation, once triggered it updates
+table and bars
+*************************************************/
 function handleAdd(data, status){
 	if (data.success) {
-		console.log("Movement added.");
-		alert("Movement added.");
 		getMovement(month,data.type);
 		getAvg(data.type);
 		getTotal(month, data.type);
 	}
 }
 
+/************************************************
+Callback for Modify operation, once triggered it updates
+table and bars
+*************************************************/
 function handleModify(data, status){
 	if (data.success) {
-		console.log("Movement modified.");
-		alert("Movement modified.");
 		getMovement(month,data.type);
 		getAvg(data.type);
 		getTotal(month, data.type);
 	}
 }
 
+/************************************************
+Callback for Remove operation, once triggered it updates
+table and bars
+*************************************************/
 function handleDelete(data, status){
 	if (data.success) {
-		console.log("Movement deleted.");
-		alert("Movement deleted.");
-		//Do a Select before to see what type is it. and return it in the response.
-		//getMovement(month,data.type);
-		//getAvg(data.type);
-		//getTotal(month, data.type);
+		removeRowFromTable(data.movementID);
+	    getAvg(data.type);
+		getTotal(month, data.type);
 	}
 }
 
+/************************************************
+Callback for Get operation, once triggered it updates
+table
+*************************************************/
 function handleGet(data, status){
 	if (data.success) {
-		console.log(JSON.stringify(data.data));
 		rows = JSON.parse(JSON.stringify(data.data));
 		updateTable(rows);
 	}
 }
 
+/************************************************
+Callback for Avg operation, once triggered it updates
+a given avg bar
+*************************************************/
 function handleAvg(data, status){
 	if (data.success) {
 		var avg = data.avg;
 		var type = data.type;
-		console.log("updating avg of type: " + type + ":"+types[type]);
 		updateBarAvg(type,avg);
 	}
 }
 
+/************************************************
+Callback for total operation, once triggered it updates
+a given total bar
+*************************************************/
 function handleTotal(data, status){
 	if (data.success) {
 		var total = data.total;
 		var type = data.type;
-		console.log("updating total of type: " + type + ":"+types[type]);
 		updateBarTotal(type,total);
 	}
 }
+
+
+/************************************************
+Sort of a Controller, I still need to separate
+more view from controller.
+*************************************************/
 
 //Use POST method here
 function addMovement(){

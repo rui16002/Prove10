@@ -40,10 +40,92 @@ function prepareDel(){
 	btn_del.style.display='block';
 }
 
+/************************************************
+This function controls which buttons and fields 
+are available for a given operation
+*************************************************/
 function alterForm(tab){
 	switch (tab){
 		case 'add':prepareAdd();break;
 		case 'mod':prepareMod();break;
 		case 'del':prepareDel();break;
 	}
+}
+
+function rowExist(row){
+	var container = document.getElementById("table_rows");
+	var tablerow = container.getElementsByClassName('movrow');
+	var ids = container.getElementsByClassName('idcol');
+	if (!tablerow) {
+		return false;
+	}
+	else if (!ids) {
+		return false;
+	}
+	else
+	{
+		for (var i = 0; i < ids.length; i++) {
+			var tableId = parseInt(ids[i].innerHTML);
+			var dataID = parseInt(row.movementid);
+			if (tableId == dataID) {
+				return i;
+			}
+		}
+	}
+}
+
+function removeRowFromTable(id){
+	var container = document.getElementById("table_rows");
+	var tablerow = container.getElementsByClassName('movrow');
+	var ids = container.getElementsByClassName('idcol');
+	for (var i = ids.length - 1; i >= 0; i--) {	
+		var tableId = parseInt(ids[i].innerHTML);
+		if (tableId==id) {container.removeChild(tablerow[i]);}
+	}
+}
+
+/************************************************
+This function adds new values to the table or modify existing
+*************************************************/
+function updateTable(data){
+	var container = document.getElementById("table_rows");
+	var tablerow = container.getElementsByClassName('movrow');
+
+	if (data && data.length > 0){
+		for (var i = data.length - 1; i >= 0; i--) {
+			if (!rowExist(data[i])) {
+				container.appendChild(addNewRow(data[i]));
+			}
+			else
+			{
+				container.replaceChild(addNewRow(data[i]),tablerow[rowExist(data[i])]);
+			}
+		}
+	}
+}
+
+/************************************************
+This function redimention total bar and assign
+value to it
+*************************************************/
+function updateBarTotal(name,total){
+	var barAmount = document.getElementById('cat-bar-total-'+name);
+	barAmount.style.width = barScale(total)+"%";
+	var barAmountTxt = document.createTextNode(total+"€");
+	var barAmountspan = document.getElementById('cat-bar-amount-'+name);
+	barAmountspan.innerHTML = '';
+	barAmountspan.appendChild(barAmountTxt);
+}
+
+/************************************************
+This function redimention avg bar and assign
+value to it
+*************************************************/
+function updateBarAvg(name,avg){
+	var barBenchmark = document.getElementById('cat-bar-benchmark-'+name);
+	barBenchmark.style.width = barScale(avg)+"%";
+	var barBenchmarkTxt = document.createTextNode(avg+"€");
+	var barBenchmarkspan = document.getElementById('cat-bar-avg-'+name);
+	barBenchmarkspan.innerHTML = '';
+	barBenchmarkspan.appendChild(barBenchmarkTxt);
 }

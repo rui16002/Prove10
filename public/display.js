@@ -39,21 +39,39 @@ function addNewBar(title) {
 
 function addNewRow(row){
 	var newRow = document.createElement('tr');
+	newRow.setAttribute("class", "movrow");
 	var rowid = document.createElement('td');
+	rowid.setAttribute("class", "idcol text-right");
 	var rowidtxt = document.createTextNode(row.movementid);
 	rowid.appendChild(rowidtxt);
 	newRow.appendChild(rowid);
 
+	var formateddate = new Date(row.movementdate).toDateString();
+
 	var rowdate = document.createElement('td');
-	var rowdatetxt = document.createTextNode(row.movementdate);
+	rowdate.setAttribute("class", "text-right");
+	var rowdatetxt = document.createTextNode(formateddate);
 	rowdate.appendChild(rowdatetxt);
 	newRow.appendChild(rowdate);
 
+	var icon;
+	switch (row.type) {
+		case types[0]: icon = "piggy-bank"; break;
+		case types[1]: icon = "gift"; break;
+		case types[2]: icon = "education"; break;
+		case types[3]: icon = "road"; break;
+		case types[4]: icon = "briefcase"; break;
+		case types[5]: icon = "credit-card"; break;
+		case types[6]: icon = "heart"; break;
+		case types[7]: icon = "home"; break;
+		default: icon= "search";
+	}
+
 	var rowtype = document.createElement('td');
 	var typeIcon = document.createElement('span');
-	typeIcon.setAttribute("class", "glyphicon glyphicon-search");
+	typeIcon.setAttribute("class", "glyphicon glyphicon-"+icon);
 	rowtype.appendChild(typeIcon);
-	var rowtypetxt = document.createTextNode(row.typeid);
+	var rowtypetxt = document.createTextNode(row.type);
 	rowtype.appendChild(rowtypetxt);
 	newRow.appendChild(rowtype);
 
@@ -63,7 +81,7 @@ function addNewRow(row){
 	newRow.appendChild(rowname);
 
 	var rowamount = document.createElement('td');
-	rowamount.setAttribute("class", "text-right")
+	rowamount.setAttribute("class", "text-right");
 	var rowamounttxt = document.createTextNode(row.amount+" €");
 	rowamount.appendChild(rowamounttxt);
 	newRow.appendChild(rowamount);

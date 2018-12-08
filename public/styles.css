@@ -17,6 +17,10 @@
     box-shadow: 0 0px 5px 0 rgba(0,0,0,0.2);
 }
 
+.glyphicon {
+    padding-right: 5px;
+}
+
 .cat-bar-amount {
 	color: white;
 }

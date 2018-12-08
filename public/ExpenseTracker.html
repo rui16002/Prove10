@@ -24,9 +24,19 @@
 			<h1>Expense Tracker</h1>
 		</div>	
 		<div class="col-sm-9">
-			<div id="cat-bar-container" class="col-sm-12 cat-bar-container">
+			<div class="col-sm-12 cat-bar-container">
+				<div class="cat-bar-item text-right">
+					<div class="btn-group">
+						<button type="button" onClick="updateMonth('left')" class="btn btn-primary glyphicon glyphicon-menu-left"></button>
+						<span id="month_container" class="btn disabled">Month</span>
+						<button type="button" onClick="updateMonth('right')" class="btn btn-primary glyphicon glyphicon-menu-right"></button>
+					</div>
+				</div>
+			<!-- bars container -->	
+				<div id="cat-bar-container" class="col-sm-12 cat-bar-container">
+				</div>
 			</div>
-			<!-- /container-expenses -->
+			<!-- Table container -->
 			<div class="col-sm-12 table-container">
 				<table>
 					<thead>
@@ -48,12 +58,13 @@
 							</th>
 						</tr>
 					</thead>
+					<!-- rows container -->
 					<tbody id="table_rows">
 					</tbody>
 				</table>
 			</div>
 		</div>
-
+		<!-- /Form -->
 		<div class="form_container col-sm-3">
 			<div class="btn-group btn-group-justified">
 				<a onclick="alterForm('add');" class="btn btn-primary">Add</a>
@@ -68,14 +79,14 @@
 				<div class="form-group">
 					<label for="m_type">Movement Type</label>
 					<select class="form-control" name="type" id="m_type">
-						<option value="0">Income</option> glyphicon-piggy-bank
-						<option value="1">Donations</option>glyphicon-gift
-						<option value="2">Education</option> <!--glyphicon-education-->
-						<option value="3">Transportation</option> glyphicon-road
-						<option value="4">Loans</option>glyphicon-briefcase
-						<option value="5">Credit cards</option> glyphicon-credit-card
-						<option value="6">Health</option> glyphicon-heart
-						<option value="7">Home</option> glyphicon-home
+						<option value="0">Income</option>
+						<option value="1">Donations</option>
+						<option value="2">Education</option>
+						<option value="3">Transportation</option>
+						<option value="4">Loans</option>
+						<option value="5">Credit cards</option>
+						<option value="6">Health</option>
+						<option value="7">Home</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -95,46 +106,61 @@
 				<button id="btn_del" type="button" class="btn btn-default" onclick="deleteMovement()">Delete</button>
 			</form> 
 		</div>
-		<div id="demo"></div>
+
 	</div>
 	<script type="text/javascript">
+		var month;
 		var container = document.getElementById("cat-bar-container");
-        var month = 8;
-		for (var type = 0; type <= 7; type++) {
-			container.appendChild(addNewBar(type));
-			getMovement(month,type);
-			getAvg(type);
-			getTotal(month, type);
-		}
 
-		function updateTable(data){
-			var container = document.getElementById("table_rows");
-			if (data && data.length > 0){
-				for (var i = data.length - 1; i >= 0; i--) {
-					console.log("row " + JSON.stringify(i));
-					container.appendChild(addNewRow(data[i]));
-				}
+		//if it is the first time update monthpicker, table and bars
+		if (typeof(month) == 'undefined') {month = 8;updateMonth();}
+
+
+/************************************************
+This function updates the bars and table.
+Before doing so, it deletes previous content
+*************************************************/
+function updateBarsAndTable(){
+			//cleanup first, just in case there already data in it
+			var fc = container.firstChild;
+			while( fc ) {
+				container.removeChild( fc );
+				fc = container.firstChild;
+			}
+
+			var tcontainer = document.getElementById("table_rows");
+			var fc = tcontainer.firstChild;
+			while( fc ) {
+				tcontainer.removeChild( fc );
+				fc = tcontainer.firstChild;
+			}
+			//Now go and create all the elements
+			for (var type = 0; type <= 7; type++) {
+				container.appendChild(addNewBar(type));
+				getMovement(month,type);
+				getAvg(type);
+				getTotal(month, type);
 			}
 		}
 
-		function updateBarTotal(name,total){
-			var barAmount = document.getElementById('cat-bar-total-'+name);
-			barAmount.style.width = barScale(total)+"%";
-			var barAmountTxt = document.createTextNode(total+"€");
-			var barAmountspan = document.getElementById('cat-bar-amount-'+name);
-			barAmountspan.innerHTML = '';
-			barAmountspan.appendChild(barAmountTxt);
-		}
+/************************************************
+This function updates the month picker located in 
+the upper right corner of the bars.
+Each time it is updated so are the bars and table.
+*************************************************/
+function updateMonth(dir){
+	switch (dir) {
+		case 'left': if (month > 1) {month--;} break;
+		case 'right': if (month < 12) {month++;} break;
+	}
 
-		function updateBarAvg(name,avg){
-			var barBenchmark = document.getElementById('cat-bar-benchmark-'+name);
-			barBenchmark.style.width = barScale(avg)+"%";
-			var barBenchmarkTxt = document.createTextNode(avg+"€");
-			var barBenchmarkspan = document.getElementById('cat-bar-avg-'+name);
-			barBenchmarkspan.innerHTML = '';
-			barBenchmarkspan.appendChild(barBenchmarkTxt);
-		}
-	</script>
-	<script src="formUpdate.js"></script>
+	var month_container = document.getElementById("month_container");
+	var months = ['','JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+	month_container.innerHTML = months[month];
+	updateBarsAndTable();
+}
+
+</script>
+<script src="formUpdate.js"></script>
 </body>
 </html>

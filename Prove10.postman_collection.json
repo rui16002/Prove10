@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "dbfb7824-e911-4372-acfc-04d360cdf276",
+		"name": "Prove10",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddMovement",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "27aaeb69-dd0b-48c5-bf76-fe6530e4082d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "type",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "01/08/2018",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Salary",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "1850",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://desolate-reaches-83720.herokuapp.com/AddMovement",
+					"protocol": "https",
+					"host": [
+						"desolate-reaches-83720",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"AddMovement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMovement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://desolate-reaches-83720.herokuapp.com/getMovement?month=8&type=2",
+					"protocol": "https",
+					"host": [
+						"desolate-reaches-83720",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getMovement"
+					],
+					"query": [
+						{
+							"key": "month",
+							"value": "8"
+						},
+						{
+							"key": "type",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAvg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://desolate-reaches-83720.herokuapp.com/getAvg?type=2",
+					"protocol": "https",
+					"host": [
+						"desolate-reaches-83720",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getAvg"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTotal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://desolate-reaches-83720.herokuapp.com/getTotal?month=8&type=2",
+					"protocol": "https",
+					"host": [
+						"desolate-reaches-83720",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getTotal"
+					],
+					"query": [
+						{
+							"key": "month",
+							"value": "8"
+						},
+						{
+							"key": "type",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModifyMovement",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://desolate-reaches-83720.herokuapp.com/ModifyMovement?movementID=9&type=1&name=Salary&amount=1860.50&date=2018/08/01",
+					"protocol": "https",
+					"host": [
+						"desolate-reaches-83720",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"ModifyMovement"
+					],
+					"query": [
+						{
+							"key": "movementID",
+							"value": "9"
+						},
+						{
+							"key": "type",
+							"value": "1"
+						},
+						{
+							"key": "name",
+							"value": "Salary"
+						},
+						{
+							"key": "amount",
+							"value": "1860.50"
+						},
+						{
+							"key": "date",
+							"value": "2018/08/01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteMovement",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://desolate-reaches-83720.herokuapp.com/DeleteMovement?movementID=1",
+					"protocol": "https",
+					"host": [
+						"desolate-reaches-83720",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"DeleteMovement"
+					],
+					"query": [
+						{
+							"key": "movementID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,38 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+1. Project Title / One sentence description:
+Expense tracker
+
+2. Copy and paste the URL for one of your Web service endpoints at Heroku:
+https://desolate-reaches-83720.herokuapp.com/
+
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/rui16002/Prove10
+
+4. List the name of each of the Web service endpoints that are working:
+/AddMovement
+/getMovement
+/getAvg
+/getTotal
+/modifyMovement
+/deleteMovement
+
+5. List any Web service endpoints that are not yet functioning:
+
+
+6. Please select the category you feel best describes your assignment:
+A - Some attempt was made
+B - Developing, but significantly deficient
+C - Slightly deficient, but still mostly adequate
+X D - Meets requirements
+E - Shows creativity and excels above and beyond requirements
+
+
+7. Provide a brief justification (1-2 sentences) for selecting that category.
+The objective of this assignment was to have the endpoints working and ready for further use.
+I added some validations to make sure no unwanted input is processed and validated the enpoints using Postman.
+
+8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
+No questions so far, I am still getting used to write Node code, it is a different way to code.
+I need to figure out a way to check whether the row data already exist and to process db responses in cases like
+updating db, adding or deleting rows, etc.
