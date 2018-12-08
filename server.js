@@ -105,7 +105,7 @@ function addMovement(req, res) {
 				res.writeHead(500).json({success: false, data: error});
 			} else {
 				res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({success: true, type: type0, movementID: result[0].movementID}));
+                res.end(JSON.stringify({success: true, movementID: result[0].movementID}));
 			}
 		})
 	}
